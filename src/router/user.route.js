@@ -1,14 +1,11 @@
 const Router = require('koa-router')
 
-const router = new Router()
+const router = new Router({prefix: '/user'})
 
 router.get('/', (ctx) => {
-    ctx.body = '这是主页'
-})
-router.get('/user', (ctx) => {
     ctx.body = '用户页'
 })
-router.post('/user', (ctx) => {
+router.post('/', (ctx) => {
     ctx.body = '创建用户'
 })
 
