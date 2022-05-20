@@ -20,6 +20,14 @@ router.get('/:id', (ctx) => {
 
     ctx.body = res[0]
 })
+// GET /users?start=18&end=20 ---- 获取所有的用户信息, 返回一个数组
+router.get('/', (ctx) => {
+    // 通过 ctx.query 是ctx.request.query的代理 解析键值对参数
+    const { start = 0, end = 0 } = ctx.query
+    const res = db.filter(item => item.age > start && item.age < end)
+    // 解析键值对
+    res.length == 0 ? ctx.throw(404) : (ctx.body = res)
+})
 router.post('/', (ctx) => {
     ctx.body = '创建用户'
 })
