@@ -24,6 +24,7 @@ router.get('/:id', (ctx) => {
 router.get('/', (ctx) => {
     // 通过 ctx.query 是ctx.request.query的代理 解析键值对参数
     const { start = 0, end = 0 } = ctx.query
+    if (start > end) ctx.throw(422)
     const res = db.filter(item => item.age > start && item.age < end)
     // 解析键值对
     res.length == 0 ? ctx.throw(404) : (ctx.body = res)
